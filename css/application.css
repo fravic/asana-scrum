@@ -1,0 +1,148 @@
+HTML, BODY {
+    color: #4a4a4a;
+    font-family: 'Helvetica', 'Arial';
+    font-size: 15px;
+    height: 100%;
+}
+
+H1 {
+    color: #08c;
+    font-size: 36px;
+    font-weight: lighter;
+}
+
+H2 {
+    color: #08c;
+    font-size: 22px;
+    font-weight: lighter;
+    margin-bottom: 15px;
+}
+
+H3 {
+    font-size: 20px;
+    font-variant: small-caps;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+A {
+    border-bottom: 1px dashed #4a4a4a;
+    color: #4a4a4a;
+    text-decoration: none;
+}
+
+#includes {
+    display: none;
+}
+
+#leftRail {
+    float: left;
+    height: 100%;
+    margin: 18px 0 0 0;
+    overflow: hidden;
+    padding-left: 10px;
+    position: fixed;
+    width: 160px;
+    z-index: 100;
+}
+
+#leftRail .title {
+    position: fixed;
+}
+
+#list {
+    moz-box-sizing: border-box;
+    ms-box-sizing: border-box;
+    webkit-box-sizing: border-box;
+    box-sizing: border-box;
+
+    height: 100%;
+    margin-top: 50px;
+    overflow: scroll;
+    width: 180px;
+}
+
+#peopleList {
+    margin-bottom: 85px;
+}
+
+#peopleList LI {
+    font-size: 12px;
+    list-style: none;
+    margin-bottom: 5px;
+}
+
+#peopleList INPUT {
+    margin-right: 8px;
+}
+
+#container {
+    moz-box-sizing: border-box;
+    ms-box-sizing: border-box;
+    webkit-box-sizing: border-box;
+    box-sizing: border-box;
+
+    height: 100%;
+    overflow-y: scroll;
+    padding: 20px 0 0 200px;
+    position: relative;
+    width: 100%;
+}
+
+#content {
+    position: relative;
+}
+
+#auth {
+    height: 50px;
+    left: 50%;
+    line-height: 24px;
+    margin: -25px 0 0 -150px;
+    padding: 10px;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    width: 300px;
+    z-index: 100;
+}
+
+.scrumBox, #auth {
+    moz-box-shadow: 0px 1px 2px #DDD;
+    webkit-box-shadow: 0px 1px 2px #DDD;
+    box-shadow: 0px 1px 2px #DDD;
+
+    border: 1px solid #e4e4e4;
+    border-radius: 4px;
+    float: left;
+    width: 275px;
+}
+
+.scrumBox {
+    margin: 0 25px 25px 0;
+    padding: 15px;
+    padding-bottom: 0;
+}
+
+.taskList {
+    margin-bottom: 15px;
+}
+
+.taskList LI {
+    border-top: 1px solid #e4e4e4;
+    cursor: pointer;
+    line-height: 1.2em;
+    margin: 0 -15px 0 -15px;
+    padding: 8px 15px 8px 15px;
+}
+
+.taskList LI.even, .taskList LI:last-child {
+    border-bottom: 1px solid #e4e4e4;
+}
+
+.taskList LI.over {
+    background-color: #e4e4e4;
+}
+
+.taskList LI.done {
+    text-decoration: line-through;
+}
