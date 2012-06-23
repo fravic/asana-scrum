@@ -17,9 +17,5 @@ class Scrum < Sinatra::Base
     File.read('public/index.html')
   end
 
-  get '/auth' do
-    session[:auth] = params[:auth]
-  end
-
   run! if app_file == $0
 end

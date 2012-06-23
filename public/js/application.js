@@ -2,7 +2,6 @@ function _Application() {
 
     var APP_URL = "https://app.asana.com/0";
     var API_URL = "./";
-    var AUTH_URL = "./auth";
     var COOKIE_NAME = "scrumKey";
     var COOKIE_EXPIRE_DAYS = 365;
 
@@ -14,16 +13,6 @@ function _Application() {
     var _apiKey;
 
     /* Async functions */
-
-    function authCall(authKey, callback) {
-        $.ajax({
-            type: "GET",
-            url: AUTH_URL,
-            data: {auth: authKey},
-            success: callback,
-            error: apiError
-        });
-    }
 
     function apiCall(url, callback, data) {
         $.ajax({
@@ -212,7 +201,7 @@ function _Application() {
         _apiKey = $("#authForm INPUT:first").val();
         createCookie(COOKIE_NAME, _apiKey, COOKIE_EXPIRE_DAYS);
         $("#auth").fadeOut("fast");
-        authCall(_apiKey, loadUserList);
+        loadUserList();
         return false;
     }
 
@@ -226,14 +215,7 @@ function _Application() {
         }
 
         setTimeout(timedReload, RELOAD_TIME);
-        
-        _currentWorkspace = 100782134958;
-
-        if (_apiKey = readCookie(COOKIE_NAME)) {
-            $("#auth").hide();
-            loadUserList();
-        }
-        $("#authForm").submit(auth);
+        loadUserList();
     }
 
     $(document).ready(onLoad);
