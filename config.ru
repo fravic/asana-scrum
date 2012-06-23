@@ -1,2 +1,2 @@
-require 'app'
+require 'scrum'
 run Sinatra::Application
