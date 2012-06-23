@@ -1,2 +1,2 @@
 require 'scrum'
-run Sinatra::Application
+run Scrum
