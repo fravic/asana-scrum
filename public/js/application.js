@@ -2,6 +2,7 @@ function _Application() {
 
     var APP_URL = "https://app.asana.com/0";
     var API_URL = "./";
+    var AUTH_URL = "./auth";
     var COOKIE_NAME = "scrumKey";
     var COOKIE_EXPIRE_DAYS = 365;
 
@@ -14,15 +15,21 @@ function _Application() {
 
     /* Async functions */
 
+    function authCall(authKey, callback) {
+        $.ajax({
+            type: "GET",
+            url: AUTH_URL,
+            data: {auth: authKey},
+            success: callback,
+            error: apiError
+        });
+    }
+
     function apiCall(url, callback, data) {
         $.ajax({
             type: "GET",
             url: API_URL + url,
             data: data,
-            headers:
-            {
-                Authorization: makeBaseAuth(_apiKey, '')
-            },
             success: callback,
             error: apiError
         });
@@ -205,7 +212,7 @@ function _Application() {
         _apiKey = $("#authForm INPUT:first").val();
         createCookie(COOKIE_NAME, _apiKey, COOKIE_EXPIRE_DAYS);
         $("#auth").fadeOut("fast");
-        loadUserList();
+        authCall(_apiKey, loadUserList);
         return false;
     }
 

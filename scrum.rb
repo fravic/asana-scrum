@@ -1,15 +1,25 @@
 require 'rubygems'
-require 'sinatra'
+require 'sinatra/base'
 require 'rack/reverse_proxy'
 
 ASANA_API_URL = 'https://app.asana.com/api/1.0'
-API_KEY = 'ggCfvgG.y18qBCLzfVSlfeHMyKgHLebl'
+ASANA_API_KEY = "ggCfvgG.y18qBCLzfVSlfeHMyKgHLebl"
 
-use Rack::ReverseProxy do
-  reverse_proxy_options :preserve_host => true
-  reverse_proxy /^\/(?!css)(?!js)(.+)$/, ASANA_API_URL + '/$1', :username => API_KEY, :password => ''
-end
+class Scrum < Sinatra::Base
+  set :sessions, true
 
-get '/' do
-  File.read('public/index.html')
+  use Rack::ReverseProxy do
+    reverse_proxy_options :preserve_host => true
+    reverse_proxy /^\/(?!css)(?!js)(?!auth)(.+)$/, ASANA_API_URL + '/$1', :username => ASANA_API_KEY, :password => ''
+  end
+
+  get '/' do
+    File.read('public/index.html')
+  end
+
+  get '/auth' do
+    session[:auth] = params[:auth]
+  end
+
+  run! if app_file == $0
 end
