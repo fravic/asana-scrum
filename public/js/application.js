@@ -2,8 +2,6 @@ function _Application() {
 
     var APP_URL = "https://app.asana.com/0";
     var API_URL = "./";
-    var COOKIE_NAME = "scrumKey";
-    var COOKIE_EXPIRE_DAYS = 365;
 
     var RELOAD_TIME = 900000;
 
@@ -19,8 +17,7 @@ function _Application() {
             type: "GET",
             url: API_URL + url,
             data: data,
-            success: callback,
-            error: apiError
+            success: callback
         });
     }
 
@@ -42,13 +39,6 @@ function _Application() {
                     assignee:userId,
                     opt_fields: "name,assignee,assignee_status,completed,completed_at"
                 });
-
-    }
-
-    function apiError(e) {
-        createCookie(COOKIE_NAME, '', 0);
-        $("#authMessage").html("Invalid Asana API Key, please re-enter:");
-        $("#auth").fadeIn("fast");
     }
 
     /* Data receipt */
@@ -195,14 +185,6 @@ function _Application() {
 
     function timedReload() {
         window.location.reload();
-    }
-
-    function auth() {
-        _apiKey = $("#authForm INPUT:first").val();
-        createCookie(COOKIE_NAME, _apiKey, COOKIE_EXPIRE_DAYS);
-        $("#auth").fadeOut("fast");
-        loadUserList();
-        return false;
     }
 
     function onLoad() {
