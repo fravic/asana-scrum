@@ -1,2 +1,2 @@
 require 'scrum'
-Scrum.run!
+run Scrum
