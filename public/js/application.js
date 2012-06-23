@@ -1,7 +1,7 @@
 function _Application() {
 
     var APP_URL = "https://app.asana.com/0";
-    var API_URL = "https://app.asana.com/api/1.0";
+    var API_URL = "./";
     var COOKIE_NAME = "scrumKey";
     var COOKIE_EXPIRE_DAYS = 365;
 
