@@ -21,6 +21,16 @@ function _Application() {
         });
     }
 
+    function authCall(authKey, callback) {
+        $.ajax({
+            type: "GET",
+            url: AUTH_URL,
+            data: {auth: authKey},
+            success: callback,
+            error: apiError
+        });
+    }
+
     function makeBaseAuth(user, pass) {
         var tok = user + ':' + pass;
         var hash = Base64.encode(tok);
@@ -187,6 +197,10 @@ function _Application() {
         window.location.reload();
     }
 
+    function auth() {
+        authCall($("#authForm INPUT").val(), loadUserList);
+    }
+
     function onLoad() {
         var userHash = window.location.hash.slice(1);
         if (userHash.length > 0) {
@@ -197,6 +211,13 @@ function _Application() {
         }
 
         setTimeout(timedReload, RELOAD_TIME);
+
+        if (_apiKey = readCookie(COOKIE_NAME)) {
+            $("#auth").hide();
+            loadUserList();
+        }
+        $("#authForm").submit(auth);
+
         loadUserList();
     }
 

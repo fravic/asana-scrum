@@ -5,7 +5,9 @@ ASANA_API_URL = 'https://app.asana.com/api/1.0'
 ASANA_API_KEY = "ggCfvgG.y18qBCLzfVSlfeHMyKgHLebl"
 
 class Scrum < Sinatra::Base
-  use Rack::ReverseProxy do
+  set :sessions, true
+
+  use Rack::ReverseProxy do |rprox|
     reverse_proxy_options :timeout => 2
 
     reverse_proxy /^\/(?!css)(?!js)(?!auth)(.+)$/, ASANA_API_URL + '/$1', :username => ASANA_API_KEY, :password => ''
@@ -13,6 +15,10 @@ class Scrum < Sinatra::Base
 
   get '/' do
     File.read('public/index.html')
+  end
+
+  get '/auth' do
+    session[:auth] = params[:auth]
   end
 
   run! if app_file == $0
