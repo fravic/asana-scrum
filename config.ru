@@ -1,2 +1,2 @@
-require 'scrum.rb'
+require './scrum'
 run Scrum
