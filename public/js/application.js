@@ -1,7 +1,7 @@
 function _Application() {
 
     var APP_URL = "https://app.asana.com/0";
-    var API_URL = "./";
+    var API_URL = ".";
 
     var RELOAD_TIME = 900000;
 
@@ -133,7 +133,7 @@ function _Application() {
             window.open(url, "_blank");
         });
     }
-    
+
     function addYesterdayTask(task, idx) {
         var scrumBox = $("#scrumBox" + task.assignee.id);
         addToTaskList($(".yesterday .taskList", scrumBox), task, idx);
@@ -212,12 +212,7 @@ function _Application() {
 
         setTimeout(timedReload, RELOAD_TIME);
 
-        if (_apiKey = readCookie(COOKIE_NAME)) {
-            $("#auth").hide();
-            loadUserList();
-        }
-        $("#authForm").submit(auth);
-
+        $("#auth").hide();
         loadUserList();
     }
 
