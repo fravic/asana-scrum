@@ -16,6 +16,7 @@ function _Application() {
         $.ajax({
             type: "GET",
             url: API_URL + url,
+            contentType: "application/json",
             data: data,
             success: callback
         });

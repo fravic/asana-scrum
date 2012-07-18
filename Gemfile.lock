@@ -1,5 +1,4 @@
 GEM
-  remote: http://gems.local.twitter.com/
   remote: http://rubygems.org/
   specs:
     addressable (2.2.8)
