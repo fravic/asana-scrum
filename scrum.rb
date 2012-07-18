@@ -1,8 +1,3 @@
-require 'bundler/setup'
-require 'sinatra/base'
-require 'rack/reverse_proxy'
-require 'rack/ssl-enforcer'
-
 ASANA_API_URL = 'https://app.asana.com/api/1.0'
 
 class Scrum < Sinatra::Base
