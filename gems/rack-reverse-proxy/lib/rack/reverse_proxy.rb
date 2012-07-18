@@ -20,7 +20,6 @@ module Rack
 
       # BEGIN MONKEY PATCH
       all_opts[:username] = env['rack.session'][:username] or nil;
-
       # END MONKEY PATCH
 
       headers = Rack::Utils::HeaderHash.new
@@ -94,6 +93,13 @@ module Rack
 
     def create_response_headers http_response
       response_headers = Rack::Utils::HeaderHash.new(http_response.to_hash)
+
+      # BEGIN MONKEY PATCH
+      response_headers.each do |key, header|
+        response_headers[key] = header.first
+      end
+      # END MONKEY PATCH
+
       # handled by Rack
       response_headers.delete('status')
       # TODO: figure out how to handle chunked responses
