@@ -19,10 +19,7 @@ module Rack
       all_opts = @global_options.dup.merge(matcher.options)
 
       # BEGIN MONKEY PATCH
-
-      puts "MONKEY PATCH GO!"
       all_opts[:username] = env['rack.session'][:username] or nil;
-      puts all_opts[:username]
 
       # END MONKEY PATCH
 

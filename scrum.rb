@@ -1,15 +1,15 @@
+require 'bundler/setup'
 require 'sinatra/base'
 require 'rack/reverse_proxy'
 require 'rack/ssl-enforcer'
 
 ASANA_API_URL = 'https://app.asana.com/api/1.0'
-ASANA_API_KEY = ENV["ASANA_API_KEY"]
 
 class Scrum < Sinatra::Base
   set :sessions, true
 
   use Rack::ReverseProxy do |rprox|
-    reverse_proxy /^\/(?!css)(?!js)(?!auth)(.+)$/, ASANA_API_URL + '/$1', :username => ASANA_API_KEY, :password => ''
+    reverse_proxy /^\/(?!css)(?!js)(?!auth)(.+)$/, ASANA_API_URL + '/$1', :password => ''
   end
 
   configure :production do
@@ -21,7 +21,7 @@ class Scrum < Sinatra::Base
   end
 
   get '/auth' do
-    session[:auth] = params[:auth]
+    session[:username] = params[:auth]
   end
 
   run! if app_file == $0

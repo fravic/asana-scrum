@@ -2,8 +2,10 @@ function _Application() {
 
     var APP_URL = "https://app.asana.com/0";
     var API_URL = ".";
+    var AUTH_URL = "./auth";
 
     var RELOAD_TIME = 900000;
+    var COOKIE_NAME = "scrumKey";
 
     var _users = {};
     var _selectedUsers = [];
@@ -20,6 +22,12 @@ function _Application() {
             data: data,
             success: callback
         });
+    }
+
+    function apiError(e) {
+        createCookie(COOKIE_NAME, '', 0);
+        $("#authMessage").html("Invalid Asana API Key, please re-enter:");
+        $("#auth").fadeIn("fast");
     }
 
     function authCall(authKey, callback) {
@@ -199,7 +207,10 @@ function _Application() {
     }
 
     function auth() {
+        createCookie(COOKIE_NAME, $("#authForm INPUT").val(), 0);
+        $("#auth").fadeOut("fast");
         authCall($("#authForm INPUT").val(), loadUserList);
+        return false;
     }
 
     function onLoad() {
@@ -213,8 +224,11 @@ function _Application() {
 
         setTimeout(timedReload, RELOAD_TIME);
 
-        $("#auth").hide();
-        loadUserList();
+        if (_apiKey = readCookie(COOKIE_NAME)) {
+            $("#auth").hide();
+            loadUserList();
+        }
+        $("#authForm").submit(auth);
     }
 
     $(document).ready(onLoad);
