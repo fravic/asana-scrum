@@ -94,12 +94,6 @@ module Rack
     def create_response_headers http_response
       response_headers = Rack::Utils::HeaderHash.new(http_response.to_hash)
 
-      # BEGIN MONKEY PATCH
-      response_headers.each do |key, header|
-        response_headers[key] = header.first
-      end
-      # END MONKEY PATCH
-
       # handled by Rack
       response_headers.delete('status')
       # TODO: figure out how to handle chunked responses
