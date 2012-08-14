@@ -95,8 +95,9 @@ module Rack
       response_headers = Rack::Utils::HeaderHash.new(http_response.to_hash)
 
       # BEGIN MONKEY PATCH
-      response_headers.each do |key, header|
-        response_headers[key] = header.first
+      response_headers.each do |key, value|
+        realval = response_headers[key]
+        response_headers[key] = realval.join("\n") if realval.is_a?(Array)
       end
       # END MONKEY PATCH
 
