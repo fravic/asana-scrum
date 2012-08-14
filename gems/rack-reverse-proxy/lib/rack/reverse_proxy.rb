@@ -19,7 +19,7 @@ module Rack
       all_opts = @global_options.dup.merge(matcher.options)
 
       # BEGIN MONKEY PATCH
-      all_opts[:username] = env['rack.session'][:username] or nil;
+      all_opts[:username] = env['rack.session'][:username] or nil
       # END MONKEY PATCH
 
       headers = Rack::Utils::HeaderHash.new

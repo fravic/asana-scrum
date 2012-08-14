@@ -26,7 +26,7 @@ function _Application() {
 
     function apiError(e) {
         createCookie(COOKIE_NAME, '', 0);
-        $("#authMessage").html("Invalid Asana API Key, please re-enter:");
+        $("#authMessage").html("Please re-enter your API key:");
         $("#auth").fadeIn("fast");
     }
 
@@ -46,7 +46,13 @@ function _Application() {
         return "Basic " + hash;
     }
 
-    function loadUserList() {
+    function loadUserList(data) {
+        console.log(data);
+        if (!data) {
+            // Assume an api error
+            return apiError();
+        }
+
         apiCall('/users', receiveUserData,
                 {opt_fields:"name,workspaces"});
     }
