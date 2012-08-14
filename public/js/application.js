@@ -126,7 +126,6 @@ function _Application() {
 
     function addToTaskList(taskList, task, idx, done) {
         var li = $("<LI>");
-        console.log(task);
         var url = APP_URL + "/" + task.assignee.id + "/" + task.id;
         li.html(task.name);
         taskList.append(li);
@@ -216,7 +215,6 @@ function _Application() {
         createCookie(COOKIE_NAME, username, 0);
         $("#auth").fadeOut("fast");
         authCall(username, loadUserList);
-        return false;
     }
 
     function onLoad() {
@@ -234,7 +232,10 @@ function _Application() {
             $("#auth").hide();
             auth(_apiKey);
         }
-        $("#authForm").submit(function() { auth($("#authForm INPUT").val()); });
+        $("#authForm").submit(function() {
+            auth($("#authForm INPUT").val());
+            return false;
+        });
     }
 
     $(document).ready(onLoad);
