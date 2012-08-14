@@ -47,9 +47,8 @@ function _Application() {
     }
 
     function loadUserList(data) {
-        console.log(data);
         if (!data) {
-            // Assume an api error
+            // Assume an api auth error
             return apiError();
         }
 
@@ -127,6 +126,7 @@ function _Application() {
 
     function addToTaskList(taskList, task, idx, done) {
         var li = $("<LI>");
+        console.log(task);
         var url = APP_URL + "/" + task.assignee.id + "/" + task.id;
         li.html(task.name);
         taskList.append(li);
@@ -212,10 +212,10 @@ function _Application() {
         window.location.reload();
     }
 
-    function auth() {
-        createCookie(COOKIE_NAME, $("#authForm INPUT").val(), 0);
+    function auth(username) {
+        createCookie(COOKIE_NAME, username, 0);
         $("#auth").fadeOut("fast");
-        authCall($("#authForm INPUT").val(), loadUserList);
+        authCall(username, loadUserList);
         return false;
     }
 
@@ -232,9 +232,9 @@ function _Application() {
 
         if (_apiKey = readCookie(COOKIE_NAME)) {
             $("#auth").hide();
-            loadUserList();
+            auth(_apiKey);
         }
-        $("#authForm").submit(auth);
+        $("#authForm").submit(function() { auth($("#authForm INPUT").val()); });
     }
 
     $(document).ready(onLoad);
