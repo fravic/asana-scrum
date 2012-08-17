@@ -61,7 +61,7 @@ function _Application() {
                 {
                     workspace:_currentWorkspace,
                     assignee:userId,
-                    opt_fields: "name,assignee,assignee_status,completed,completed_at"
+                    opt_fields: "name,assignee,assignee_status,projects,completed,completed_at"
                 });
     }
 
@@ -126,7 +126,7 @@ function _Application() {
 
     function addToTaskList(taskList, task, idx, done) {
         var li = $("<LI>");
-        var url = APP_URL + "/" + task.assignee.id + "/" + task.id;
+        var url = APP_URL + "/" + task.projects[0].id + "/" + task.id;
         li.html(task.name);
         taskList.append(li);
 
